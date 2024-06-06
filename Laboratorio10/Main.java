@@ -367,7 +367,16 @@ public class Main {
             int filaAnterior = ejercito.get(numSoldado).getFila();
             int columnaAnterior = ejercito.get(numSoldado).getColumna();
             //Le preguntamos al usuario hacia donde va a mover el soldado (arriba, derecha o izquierda)
-            ejercito.get(numSoldado).moverSoldado();
+            System.out.println("Hacia donde se moverá el soldado\n(1)Arriba\n(2)Derecha\n(3)Izquierda");
+            int mov = sc.nextInt();
+            while(1<2){
+                if(mov != 3 && mov != 2 && mov != 1)
+                    System.out.println("Ingrese una opción válida");
+                else break;
+                System.out.println("Hacia donde se moverá el soldado\n(1)Arriba\n(2)Derecha\n(3)Izquierda");
+                mov = sc.nextInt();
+            }
+            ejercito.get(numSoldado).moverSoldado(mov);
             //Comprobamos si cruza con un enemigo o aliado. Si es enemigo, lo ataca; si es aliado, vuelve a su posicion original
             int numEjercito = ejercito.get(numSoldado).getEjercito();
             int fila = ejercito.get(numSoldado).getFila();
@@ -376,7 +385,15 @@ public class Main {
                 //Si es aliado
                 if(tablero[fila][columna].getEjercito() == numEjercito){
                     System.out.println("Es aliado, volviendo a la casilla original");
-                    ejercito.get(numSoldado).retroceder();
+                    if(mov == 1){
+                        ejercito.get(numSoldado).retroceder();
+                    }
+                    else if(mov == 2){
+                        ejercito.get(numSoldado).izquierda();
+                    }
+                    else{
+                        ejercito.get(numSoldado).derecha();
+                    }
                 }
                 //Si es enemigo
                 else{

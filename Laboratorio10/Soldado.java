@@ -172,12 +172,9 @@ public class Soldado{
         }
     }
     //Metodo si el soldado tiene actitud ofensiva y que el usuario escoja la direccion a ir (arriba, derecha o izquierda)
-    public void moverSoldado(){
-        Scanner sc = new Scanner(System.in);
+    public void moverSoldado(int mov){
         boolean repetir = true;
         while(repetir){
-            System.out.println("Hacia donde se moverá el soldado\n(1)Arriba\n(2)Derecha\n(3)Izquierda");
-            int mov = sc.nextInt();
             if(mov == 1){
                 avanzar();
                 if(this.getFila() < 0 || this.getFila() > 9){
@@ -201,9 +198,6 @@ public class Soldado{
                     derecha();
                 }
                 else repetir = false;
-            }
-            else{
-                System.out.println("Opción no válida\n");
             }
         }
     }
