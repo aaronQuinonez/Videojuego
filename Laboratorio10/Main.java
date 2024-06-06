@@ -382,7 +382,7 @@ public class Main {
             }
             else{
                 ejercito.get(numSoldado).retroceder();
-                if(ejercito.get(numSoldado).getFila() < 0 && ejercito.get(numSoldado).getFila() > 9){
+                if(ejercito.get(numSoldado).getFila() < 0 || ejercito.get(numSoldado).getFila() > 9){
                     System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
                     ejercito.get(numSoldado).avanzar();
                 }

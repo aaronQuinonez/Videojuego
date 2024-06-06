@@ -141,7 +141,7 @@ public class Soldado{
             int mov = sc.nextInt();
             if(mov == 1){
                 avanzar();
-                if(this.getFila() < 0 && this.getFila() > 9){
+                if(this.getFila() < 0 || this.getFila() > 9){
                     System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
                     retroceder();
                 }
@@ -149,19 +149,22 @@ public class Soldado{
             }
             else if(mov == 2){
                 derecha();
-                if(this.getFila() < 0 && this.getFila() > 9){
+                if(this.getFila() < 0 || this.getFila() > 9){
                     System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
                     izquierda();
                 }
                 else repetir = false;
             }
-            else{
+            else if(mov == 3){
                 izquierda();
-                if(this.getFila() < 0 && this.getFila() > 9){
+                if(this.getFila() < 0 || this.getFila() > 9){
                     System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
                     derecha();
                 }
                 else repetir = false;
+            }
+            else{
+                System.out.println("Opción no válida\n");
             }
         }
     }
