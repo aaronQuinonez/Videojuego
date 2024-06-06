@@ -276,6 +276,9 @@ public class Main {
                         System.out.println("SUMATORIA:\nAtaque: " + sumAtaque + "\nDefensa: " + sumDefensa + "\nVida: " + sumVida);
                     }
                     else if(opc.equals("j")){
+                        System.out.println("\nTOTAL DE SOLDADOS CREADOS: " + (ejercito1.getLength()+ejercito2.getLength()));
+                        System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
+                        System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
                         tablero.impTableroPers(ejercito1.getEjercito(), ejercito2.getEjercito());
                         //Comienza el juego entre los usuarios
                         int ganador = 0;
@@ -290,13 +293,28 @@ public class Main {
                                 cont = false;
                                 break;
                             }
+                            System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
+                            System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
                             System.out.println("=============================================\nEJERCITO 2:");
                             actitudSoldadoPers(ejercito2.getEjercito(), tablero.getTablero());
                             //Usamos un metodo para comprobar si un ejercito ya está vacío, para decidir al ganador
                             if(estaVacioPers(ejercito1.getEjercito())){
                                 ganador = 2;
                                 cont = false;
+                                break;
                             }
+                            System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
+                            System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
+                            System.out.println("Desea continuar?\n(1)Sí\n(2)No");
+                            int conti = sc.nextInt();
+                            while(conti != 1 && conti !=2){
+                                System.out.println("Escoja una opción válida");
+                                conti = sc.nextInt();
+                            }
+                            if(conti == 1)
+                                continue;
+                            else if(conti == 2)
+                                continuar = false;
                         }
                         if(ganador == 1)
                             System.out.println("EL GANADOR ES EL EJÉRCITO 1");
