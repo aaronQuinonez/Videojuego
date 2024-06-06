@@ -131,6 +131,45 @@ public class Soldado{
             this.vive = false;
             soldadoEnemigo.setVidaActual(soldadoEnemigo.getVidaActual()+1);;
         }
+        else{
+            //Usamos el nivel de ataque cuando tengan el mismo nivel de vida
+            if(this.nivelAtaque > soldadoEnemigo.getNivelAtaque()){
+                System.out.println("Venciste al enemigo por mayor nivel de ataque");
+                soldadoEnemigo.setVive(false);
+                this.vidaActual++;
+            }
+            else if(this.nivelAtaque < soldadoEnemigo.getNivelAtaque()){
+                System.out.println("El enemigo te venció por mayor nivel de ataque");
+                this.vive = false;
+                soldadoEnemigo.setVidaActual(soldadoEnemigo.getVidaActual()+1);
+            }
+            else{
+                //Si también tiene el mismo nivel de ataque, entonces usamos la defensa
+                if(this.nivelDefensa > soldadoEnemigo.getNivelDefensa()){
+                    System.out.println("Venciste al enemigo por mayor nivel de defensa");
+                    soldadoEnemigo.setVive(false);
+                    this.vidaActual++;
+                }
+                else if(this.nivelDefensa > soldadoEnemigo.getNivelDefensa()){
+                    System.out.println("El enemigo te venció por mayor nivel de defensa");
+                    this.vive = false;
+                    soldadoEnemigo.setVidaActual(soldadoEnemigo.getVidaActual()+1);
+                }
+                else{
+                    //Si tienen todas sus estadísticas iguales, entonces se decidirá al azar
+                    int azar = (int) (Math.random()*2+1);
+                    if(azar == 1){
+                        System.out.println("Venciste al enemigo contra todo pronóstico (al azar)");
+                        soldadoEnemigo.setVive(false);
+                        this.vidaActual++;
+                    }else{
+                        System.out.println("El enemigo te venció contra todo pronóstico (al azar)");
+                        this.vive = false;
+                        soldadoEnemigo.setVidaActual(soldadoEnemigo.getVidaActual()+1);
+                    }
+                }
+            }
+        }
     }
     //Metodo si el soldado tiene actitud ofensiva y que el usuario escoja la direccion a ir (arriba, derecha o izquierda)
     public void moverSoldado(){
