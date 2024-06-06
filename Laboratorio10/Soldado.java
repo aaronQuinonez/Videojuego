@@ -1,7 +1,5 @@
 package Laboratorio10;
 
-import java.util.Scanner;
-
 public class Soldado{
     private String nombre;
     private int ejercito;

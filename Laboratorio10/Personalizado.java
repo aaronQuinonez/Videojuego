@@ -37,6 +37,13 @@ public class Personalizado {
             this.ejercito.get(i).setNombre(nombre);
         }
     }
+    public void eliminarSoldado(int fila, int columna){
+        for(int i=0; i<this.ejercito.size(); i++){
+            if(this.ejercito.get(i).getFila() == fila && this.ejercito.get(i).getColumna() == columna){
+                this.ejercito.remove(i);
+            }
+        }
+    }
     public String toString(){
         for(int i=0; i<ejercito.size(); i++){
             System.out.println("Nombre: " + ejercito.get(i).getNombre() + "\nAtaque: " + ejercito.get(i).getNivelAtaque() + "\nDefensa: " + ejercito.get(i).getNivelDefensa()
