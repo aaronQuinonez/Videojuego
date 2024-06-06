@@ -32,6 +32,10 @@ public class Main {
                 System.out.println("Ejército 2");
                 System.out.println("--------------------------------------");
                 System.out.println(ejercito2.toString());
+                //Mostramos la cantidad total de soldados y la cantidad de soldados por ejército
+                System.out.println("\nTOTAL DE SOLDADOS CREADOS: " + (ejercito1.getLength()+ejercito2.getLength()));
+                System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
+                System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
                 //Imprimimos el tablero
                 tablero.impTableroPers(ejercito1.getEjercito(), ejercito2.getEjercito());
                 //Comienza el juego entre los usuarios
