@@ -114,7 +114,7 @@ public class Main {
                     String opc = sc.next();
                     if(opc.equals("a")){
                         //Crear Soldado, permitirá crear un nuevo soldado personalizado y añadir al final del ejército (recordar que límite es de 10 soldados por ejército)
-                        if(ejercitoPerson.getEjercito().size() == 10){
+                        if(ejercitoPerson.getLength() == 10){
                             System.out.println("No se puede crear más soldados, volviendo al menú");
                         }
                         else{
@@ -137,7 +137,7 @@ public class Main {
                     }
                     else if(opc.equals("b")){
                         //Eliminar Soldado (no debe permitir un ejército vacío)
-                        if(ejercitoPerson.getEjercito().size() == 1){
+                        if(ejercitoPerson.getLength()== 1){
                             System.out.println("El ejército no debe quedar vacío");
                         }
                         else{
@@ -149,7 +149,7 @@ public class Main {
                     }
                     else if(opc.equals("c")){
                         //Clonar Soldado (crea una copia exacta del soldado) y se añade al final del ejército (recordar que límite es de 10 soldados por ejército)
-                        if(ejercitoPerson.getEjercito().size() == 10){
+                        if(ejercitoPerson.getLength() == 10){
                             System.out.println("No se puede crear más soldados, volviendo al menú");
                         }
                         else{
@@ -173,7 +173,7 @@ public class Main {
                         //Modificar Soldado (con submenú para cambiar alguno de los atributos nivelAtaque, nivelDefensa, vidaActual)
                         System.out.println("Escoja el numero del soldado a modificar");
                         int num = sc.nextInt();
-                        if(num >= 0 && num <ejercitoPerson.getEjercito().size()){
+                        if(num >= 0 && num <ejercitoPerson.getLength()){
                             System.out.println("Escoja el atributo a modificar:\n(1)Ataque\n(2)Defensa\n(3)Vida");
                             int atributo = sc.nextInt();
                             if(atributo == 1){
@@ -206,7 +206,7 @@ public class Main {
                             int primerSoldado = sc.nextInt();
                             System.out.println("Ingrese el numero del segundo soldado a comparar");
                             int segundoSoldado = sc.nextInt();
-                            if((primerSoldado >= 0 && primerSoldado < ejercitoPerson.getEjercito().size()) && (segundoSoldado >= 0 && segundoSoldado < ejercitoPerson.getEjercito().size())){
+                            if((primerSoldado >= 0 && primerSoldado < ejercitoPerson.getLength()) && (segundoSoldado >= 0 && segundoSoldado < ejercitoPerson.getLength())){
                                 //Comparamos ataque
                                 if(ejercitoPerson.getEjercito().get(primerSoldado).getNivelAtaque() == ejercitoPerson.getEjercito().get(segundoSoldado).getNivelAtaque()){
                                     System.out.println("Poseen el mismo nivel de ataque " + "(" + ejercitoPerson.getEjercito().get(primerSoldado).getNivelAtaque() + ")");
