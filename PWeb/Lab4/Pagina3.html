@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        h2{
+            font-family: Arial, sans-serif;
+        }
+        a{
+            font-size: 17px;
+            margin-right: 20px;
+        }
+        p{
+            display: inline;
+            font-family: Arial, sans-serif;
+        }
+        input[type=text]{
+            display: inline;
+            border: solid 2px gray;
+            flex-direction: column;
+            padding: 5px;
+            width: 500px;
+        }
+        .submitCuadro{
+            display: flex;
+            justify-content: right;
+        }
+        input[type="submit"]{
+            background-color: lightskyblue;
+            color: white;
+            margin-top: 15px;
+            font-size: 15px;
+            padding: 5px;
+            border: 0px;
+        }
+    </style>
+    <title>Búsqueda avanzada</title>
+</html>
+<body>
+    <a href="Pagina1.html">Búsqueda simple</a>
+    <a href="Pagina2.html">Búsqueda de imágenes</a>
+    <a>Búsqueda avanzada</a>
+    <h2>Mostrar páginas que contengan...</h2>
+    <form action="https://www.google.com/search" method="GET">
+        <table>
+            <tr>
+                <td>
+                    <p>todas estas palabras:</p>
+                </td>
+                <td>
+                    <input type="text" name="as_q">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>esta palabra o frase exacta:</p>
+                </td>
+                <td>
+                    <input type="text" name="as_epq">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>ninguna de estas palabras: </p>
+                </td>
+                <td>
+                    <input type="text" name="as_eq">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="submitCuadro">
+                        <input type="submit" value="Búsqueda con Google">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+    </form>
+</body>

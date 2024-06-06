@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: aqua;
+}
+.wrapper{
+    background-color: red;
+}
+.wrapper .opciones{
+    background-color: purple;
+    flex-direction: column;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+}
+label{
+    font-size: 18px;
+}

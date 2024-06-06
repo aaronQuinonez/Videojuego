@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <title>Consulta</title>
+</head>
+<body>
+    <div class="wrapper">
+        <form action="/xampp/cgi-bin/consulta.pl" method="post">
+            <h1>Consulta sobre universidades licenciadas</h1>
+            <div class="opciones">
+                <label for="opciones">Seleccione el campo a buscar:</label>
+                <div class="barraOpciones">
+                    <select id="opciones" name="opciones">
+                        <option value="" disabled selected>Seleccione una opción</option>
+                        <option value="Nombre Universidad">Nombre Universidad</option>
+                        <option value="Periodo Licenciamiento">Periodo Licenciamiento</option>
+                        <option value="Departamento Local">Departamento Local</option>
+                        <option value="Denominación Programa">Denominación Programa</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <input type="text" name="Consulta" placeholder="Escriba aquí">
+            </div>
+            <div>
+                <input type="submit" name="Enviar" value="Buscar">
+            </div>
+        </form>
+    </div>
+</body>

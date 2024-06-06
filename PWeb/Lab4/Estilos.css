@@ -1,0 +1,28 @@
+a{
+    font-size: 17px;
+    margin-right: 20px;
+}
+img{
+    width: 400px;
+    height: 150px;
+    display: block;
+    margin: auto;
+}
+input[type="text"]{
+    display: block;
+    margin: auto;
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    font-size: 18px;
+    width: 600px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+input[type="submit"]{
+    font-size: 15px;
+    display: block;
+    margin: auto;
+    padding: 5px;
+    width: 180px;
+}
