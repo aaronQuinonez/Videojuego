@@ -51,6 +51,8 @@ public class Main {
                         continuar = false;
                         break;
                     }
+                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
+                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
                     System.out.println("=============================================\nEJERCITO 2:");
                     actitudSoldadoPers(ejercito2.getEjercito(), tablero.getTablero());
                     tablero.impTableroActual();
@@ -58,7 +60,10 @@ public class Main {
                     if(estaVacioPers(ejercito1.getEjercito())){
                         ganador = 2;
                         continuar = false;
+                        break;
                     }
+                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
+                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
                     System.out.println("Desea continuar?\n(1)Sí\n(2)No");
                     int cont = sc.nextInt();
                     while(cont != 1 && cont !=2){
