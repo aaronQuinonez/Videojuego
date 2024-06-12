@@ -29,6 +29,13 @@ public class Reino {
             this.reino.get(i).setNombreEjercito(nombre);
         }
     }
+    public void eliminarEjercito(int fila, int columna){
+        for(int i=0; i<this.reino.size(); i++){
+            if(this.reino.get(i).getFila() == fila && this.reino.get(i).getColumna() == columna){
+                this.reino.remove(i);
+            }
+        }
+    }
     public String toString(){
         String nombre = "Nombre del reino: " + nombreReino;
         String cantidad = "Cantidad de ejércitos: " + reino.size();
