@@ -22,7 +22,7 @@ public class Main {
                 }
                 System.out.println("JUGADOR 2\nEscoja su reino\n(1)Inglaterra\n(2)Francia\n(3)Sacro Imperio\n(4)Castilla-Aragón\n(5)Moros");
                 int eleccion2 = sc.nextInt();
-                while((eleccion2 <= 0 || eleccion2 >= 6) && eleccion2 != eleccion1){
+                while((eleccion2 <= 0 || eleccion2 >= 6) || eleccion2 == eleccion1){
                     System.out.println("Escoja una opción válida");
                     System.out.println("JUGADOR 2\nEscoja su reino\n(1)Inglaterra\n(2)Francia\n(3)Sacro Imperio\n(4)Castilla-Aragón\n(5)Moros");
                     eleccion2 = sc.nextInt();

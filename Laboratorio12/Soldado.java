@@ -200,7 +200,7 @@ public class Soldado{
         }
     }
     public String toString(){
-        return "Nombre: " + this.nombre + "\nAtaque: " + this.nivelAtaque + "\nDefensa: " + this.nivelDefensa + "\nVida: " + this.nivelVida
+        return "\nNombre: " + this.nombre + "\nAtaque: " + this.nivelAtaque + "\nDefensa: " + this.nivelDefensa + "\nVida: " + this.nivelVida
         +"\nFila: " + this.fila + "\nColumna: " + this.columna;
     }
 }

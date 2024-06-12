@@ -10,6 +10,7 @@ public class Tablero {
     public Tablero(){
         this.tableroPosiciones = new boolean[10][10];
         this.tablero = new Soldado[10][10];
+        this.tableroEjercito = new Ejercito[10][10];
     }
     
     //Método para que nos retorne al ejercito

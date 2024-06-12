@@ -22,13 +22,21 @@ public class Reino {
     public void setNombreReino(String nombreReino){
         this.nombreReino = nombreReino;
     }
+    //Metodo para generar nombres
+    public void asignarNombres(int numReino){
+        for(int i=0; i<this.reino.size(); i++){
+            String nombre = "Ejercito" + i + "x" + numReino;
+            this.reino.get(i).setNombreEjercito(nombre);
+        }
+    }
     public String toString(){
         String nombre = "Nombre del reino: " + nombreReino;
         String cantidad = "Cantidad de ejércitos: " + reino.size();
         String ejercitos = "";
         for(int i=0; i<reino.size(); i++){
+            ejercitos += "\nEJERCITO " + i + "\n";
             ejercitos += reino.get(i).toString();
         }
-        return nombre + "  " + cantidad;
+        return "\n" + nombre + "\n" + cantidad + "\n" + ejercitos;
     }
 }

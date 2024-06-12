@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Ejercito {
     private ArrayList<Soldado> ejercito;
+    private String nombreEjercito;
 
     public Ejercito(){
         this.ejercito = new ArrayList<Soldado>();
@@ -14,6 +15,12 @@ public class Ejercito {
     }
     public ArrayList<Soldado> getEjercito(){
         return this.ejercito;
+    }
+    public String getNombreEjercito(){
+        return this.nombreEjercito;
+    }
+    public void setNombreEjercito(String nombre){
+        this.nombreEjercito = nombre;
     }
     public void asignarEstadisticas(){
         int length = (int) (Math.random()*10+1);
@@ -45,10 +52,11 @@ public class Ejercito {
         }
     }
     public String toString(){
+        String ejer = "";
         for(int i=0; i<ejercito.size(); i++){
-            System.out.println("Nombre: " + ejercito.get(i).getNombre() + "\nAtaque: " + ejercito.get(i).getNivelAtaque() + "\nDefensa: " + ejercito.get(i).getNivelDefensa()
-            + "\nVida: " + ejercito.get(i).getNivelVida());
+            ejer += "\nNombre: " + ejercito.get(i).getNombre() + "\nAtaque: " + ejercito.get(i).getNivelAtaque() + "\nDefensa: " + ejercito.get(i).getNivelDefensa()
+            + "\nVida: " + ejercito.get(i).getNivelVida();
         }
-        return "";
+        return ejer;
     }
 }
