@@ -32,22 +32,16 @@ public class Main {
                 Reino reino2 = crearReinos(eleccion2);
 
                 System.out.println("--------------------------------------");
-                System.out.println("Datos reino");
+                System.out.println("Datos de los reinos");
                 System.out.println(reino1.toString());
                 System.out.println(reino2.toString());
                 
+                //Creamos otro tablero para los reinos
+                Tablero tableroReinos = new Tablero();
+                tableroReinos.establecerPosReino(reino1.getReino(), reino2.getReino());
+                tableroReinos.impTableroReino(reino1.getReino(), reino2.getReino());
                 Tablero tablero = new Tablero();
-                System.out.println("--------------------------------------");
-                System.out.println("Generando ejércitos");
-                System.out.println("--------------------------------------");
-                Ejercito ejercito1 = new Ejercito();
-                ejercito1.asignarEstadisticas();
-                ejercito1.establecerEquipo(1);
-                ejercito1.asignarNombres();
-                Ejercito ejercito2 = new Ejercito();
-                ejercito2.asignarEstadisticas();
-                ejercito2.establecerEquipo(2);
-                ejercito2.asignarNombres();
+                
                 tablero.establecerPosEjercito(ejercito1.getEjercito(), ejercito2.getEjercito());
                 System.out.println("--------------------------------------");
                 System.out.println("Ejército 1");

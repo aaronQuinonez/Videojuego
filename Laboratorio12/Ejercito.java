@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Ejercito {
     private ArrayList<Soldado> ejercito;
     private String nombreEjercito;
+    private int fila;
+    private int columna;
 
     public Ejercito(){
         this.ejercito = new ArrayList<Soldado>();
@@ -21,6 +23,18 @@ public class Ejercito {
     }
     public void setNombreEjercito(String nombre){
         this.nombreEjercito = nombre;
+    }
+    public int getFila(){
+        return this.fila;
+    }
+    public void setFila(int fila){
+        this.fila = fila;
+    }
+    public int getColumna(){
+        return this.columna;
+    }
+    public void setColumna(int columna){
+        this.columna = columna;
     }
     public void asignarEstadisticas(){
         int length = (int) (Math.random()*10+1);

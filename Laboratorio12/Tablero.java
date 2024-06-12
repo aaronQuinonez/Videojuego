@@ -59,6 +59,54 @@ public class Tablero {
             ejer2.get(i).setColumna(columna);
         }
     }
+    public void establecerPosReino(ArrayList<Ejercito> reino1, ArrayList<Ejercito> reino2){
+        for(int i=0; i<reino1.size(); i++){
+            int columna = (int) (Math.random()*10);
+            int fila = (int) (Math.random()*10);
+            while(this.tableroPosiciones[fila][columna]){
+                columna = (int) (Math.random()*10);
+                fila = (int) (Math.random()*10);
+            }
+            this.tableroPosiciones[fila][columna] = true;
+            //Guardamos los valores de fila y columna en los objetos de tipo Ejercito
+            reino1.get(i).setFila(fila);
+            reino1.get(i).setColumna(columna);
+        }
+        for(int i=0; i<reino2.size(); i++){
+            int columna = (int) (Math.random()*10);
+            int fila = (int) (Math.random()*10);
+            while(this.tableroPosiciones[fila][columna]){
+                columna = (int) (Math.random()*10);
+                fila = (int) (Math.random()*10);
+            }
+            this.tableroPosiciones[fila][columna] = true;
+            //Guardamos los valores de fila y columna en los objetos de tipo Soldado
+            reino2.get(i).setFila(fila);
+            reino2.get(i).setColumna(columna);
+        }
+    }
+    public void impTableroReino(ArrayList<Ejercito> reino1, ArrayList<Ejercito> reino2){
+        for (int i = 0; i < reino1.size(); i++) {
+            int fila = reino1.get(i).getFila();
+            int columna = reino1.get(i).getColumna();
+            this.tableroEjercito[fila][columna] = reino1.get(i);
+        }
+        for (int i = 0; i < reino2.size(); i++) {
+            int fila = reino2.get(i).getFila();
+            int columna = reino2.get(i).getColumna();
+            this.tableroEjercito[fila][columna] = reino2.get(i);
+        }
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                if(tablero[i][j] != null){
+                    System.out.printf("| %-11s ", this.tablero[i][j].getNombre());
+                } else {
+                    System.out.print("|      _      ");
+                }
+            }
+            System.out.println("|");
+        }
+    }
     public void establecerNuevaPos(Soldado soldado){
         int columna = (int) (Math.random()*10);
         int fila = (int) (Math.random()*10);
