@@ -33,6 +33,18 @@ public class Tablero {
             System.out.println("|");
         }
     }
+    public void impTableroActualReino(){
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                if(tableroEjercito[i][j] != null){
+                    System.out.printf("| %-11s ", this.tableroEjercito[i][j].getNombreEjercito());
+                } else {
+                    System.out.print("|      _      ");
+                }
+            }
+            System.out.println("|");
+        }
+    }
     public void establecerPosEjercito(ArrayList<Soldado> ejer1, ArrayList<Soldado> ejer2){
         for(int i=0; i<ejer1.size(); i++){
             int columna = (int) (Math.random()*10);
@@ -80,7 +92,7 @@ public class Tablero {
                 fila = (int) (Math.random()*10);
             }
             this.tableroPosiciones[fila][columna] = true;
-            //Guardamos los valores de fila y columna en los objetos de tipo Soldado
+            //Guardamos los valores de fila y columna en los objetos de tipo Ejercito
             reino2.get(i).setFila(fila);
             reino2.get(i).setColumna(columna);
         }
@@ -98,8 +110,8 @@ public class Tablero {
         }
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 10; j++){
-                if(tablero[i][j] != null){
-                    System.out.printf("| %-11s ", this.tablero[i][j].getNombre());
+                if(tableroEjercito[i][j] != null){
+                    System.out.printf("| %-11s ", this.tableroEjercito[i][j].getNombreEjercito());
                 } else {
                     System.out.print("|      _      ");
                 }

@@ -36,6 +36,11 @@ public class Reino {
             }
         }
     }
+    public void establecerEquipo(int numReino){
+        for(int i=0; i<this.reino.size(); i++){
+            this.reino.get(i).setNumReino(numReino);
+        }
+    }
     public String toString(){
         String nombre = "Nombre del reino: " + nombreReino;
         String cantidad = "Cantidad de ejércitos: " + reino.size();

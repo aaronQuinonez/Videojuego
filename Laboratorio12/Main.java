@@ -29,7 +29,11 @@ public class Main {
                 }
                 //Creamos los respectivos reinos usando el método crearReinos
                 Reino reino1 = crearReinos(eleccion1);
+                reino1.establecerEquipo(eleccion1);
+                reino1.asignarNombres(eleccion1);
                 Reino reino2 = crearReinos(eleccion2);
+                reino2.establecerEquipo(eleccion2);
+                reino2.asignarNombres(eleccion2);
                 
                 //Creamos otro tablero para los reinos
                 Tablero tableroReinos = new Tablero();
@@ -40,30 +44,31 @@ public class Main {
                 System.out.println(reino2.toString());
                 System.out.println("--------------------------------------");
                 tableroReinos.impTableroReino(reino1.getReino(), reino2.getReino());
+                int ganadorReino = 0;
                 boolean contReino = true;
                 while(contReino){
                     //Usamos el metodo actitudSoldado para que el usuario escoja la actitud, serán 2 turnos
                     System.out.println("=============================================\nReino 1:");
-                    actitudSoldadoPers(reino1.getReino(), reino2.getReino(), tableroReinos.getTablero());
-                    tableroReinos.impTableroActual();
-                    if(estaVacioPers(ejercito2.getEjercito())){
-                        ganador = 1;
+                    actitudReino(reino1.getReino(), reino2, tableroReinos.getEjercito());
+                    tableroReinos.impTableroActualReino();
+                    if(estaVacioReino(reino2.getReino())){
+                        ganadorReino = 1;
                         contReino = false;
                         break;
                     }
-                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + reino1.getLength());
-                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
+                    System.out.println("\nTOTAL DE EJERCITOS EN REINO 1: " + reino1.getSize());
+                    System.out.println("\nTOTAL DE EJERCITOS EN REINO 2: " + reino2.getSize());
                     System.out.println("=============================================\nEJERCITO 2:");
-                    actitudSoldadoPers(ejercito2.getEjercito(), ejercito1, tablero.getTablero());
-                    tablero.impTableroActual();
+                    actitudReino(reino2.getReino(), reino1, tableroReinos.getEjercito());
+                    tableroReinos.impTableroActualReino();
                     //Usamos un metodo para comprobar si un ejercito ya está vacío, para decidir al ganador
-                    if(estaVacioPers(reino1.getEjercito())){
-                        ganador = 2;
+                    if(estaVacioReino(reino1.getReino())){
+                        ganadorReino = 2;
                         contReino = false;
                         break;
                     }
-                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + reino1.getLength());
-                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
+                    System.out.println("\nTOTAL DE EJERCITOS EN EJÉRCITO 1: " + reino1.getSize());
+                    System.out.println("\nTOTAL DE EJERCITOS EN EJÉRCITO 2: " + reino2.getSize());
                     System.out.println("Desea continuar?\n(1)Sí\n(2)No");
                     int cont = sc.nextInt();
                     while(cont != 1 && cont !=2){
@@ -75,64 +80,6 @@ public class Main {
                     else if(cont == 2)
                         contReino = false;
                 }
-                Tablero tablero = new Tablero();
-                
-                tablero.establecerPosEjercito(ejercito1.getEjercito(), ejercito2.getEjercito());
-                System.out.println("--------------------------------------");
-                System.out.println("Ejército 1");
-                System.out.println("--------------------------------------");
-                System.out.println(ejercito1.toString());
-                System.out.println("--------------------------------------");
-                System.out.println("Ejército 2");
-                System.out.println("--------------------------------------");
-                System.out.println(ejercito2.toString());
-                //Mostramos la cantidad total de soldados y la cantidad de soldados por ejército
-                System.out.println("\nTOTAL DE SOLDADOS CREADOS: " + (ejercito1.getLength()+ejercito2.getLength()));
-                System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
-                System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
-                //Imprimimos el tablero
-                tablero.impTableroPers(ejercito1.getEjercito(), ejercito2.getEjercito());
-                //Comienza el juego entre los usuarios
-                int ganador = 0;
-                boolean continuar = true;
-                while(continuar){
-                    //Usamos el metodo actitudSoldado para que el usuario escoja la actitud, serán 2 turnos
-                    System.out.println("=============================================\nEJERCITO 1:");
-                    actitudSoldadoPers(ejercito1.getEjercito(), ejercito2, tablero.getTablero());
-                    tablero.impTableroActual();
-                    if(estaVacioPers(ejercito2.getEjercito())){
-                        ganador = 1;
-                        continuar = false;
-                        break;
-                    }
-                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
-                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
-                    System.out.println("=============================================\nEJERCITO 2:");
-                    actitudSoldadoPers(ejercito2.getEjercito(), ejercito1, tablero.getTablero());
-                    tablero.impTableroActual();
-                    //Usamos un metodo para comprobar si un ejercito ya está vacío, para decidir al ganador
-                    if(estaVacioPers(ejercito1.getEjercito())){
-                        ganador = 2;
-                        continuar = false;
-                        break;
-                    }
-                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
-                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
-                    System.out.println("Desea continuar?\n(1)Sí\n(2)No");
-                    int cont = sc.nextInt();
-                    while(cont != 1 && cont !=2){
-                        System.out.println("Escoja una opción válida");
-                        cont = sc.nextInt();
-                    }
-                    if(cont == 1)
-                        continue;
-                    else if(cont == 2)
-                        continuar = false;
-                }
-                if(ganador == 1)
-                    System.out.println("EL GANADOR ES EL EJÉRCITO 1");
-                else if(ganador == 2)
-                    System.out.println("EL GANADOR ES EL EJÉRCITO 2");
             }
             else if(opcion==2){
                 Tablero tablero = new Tablero();
@@ -517,128 +464,131 @@ public class Main {
         }
     }
     public static void actitudReino(ArrayList<Ejercito> ejercito, Reino ejercito2, Ejercito[][] tablero){
-        System.out.println("Escoja al soldado:");
+        System.out.println("Escoja al ejercito:");
         Scanner sc = new Scanner(System.in);
-        int numSoldado = sc.nextInt();
-        System.out.println("Seleccione su actitud:\n(1)Defensivo\n(2)Ofensivo\n(3)Fuga(retroceder)");
-        int actitud = sc.nextInt();
-        //Segun la actitud que se eligio vamos a usar metodos para comprobar si hay un soldado del equipo enemigo al retroceder/avanzar
-        int velocidad = ejercito.get(numSoldado).getVelocidad();
-        if(actitud == 3 && velocidad != 0){
-            //Si es distinto a 0, entonces tendra que detenerse y tomar actitud defensiva
-            System.out.println("Velocidad distinta a 0, cambiando a posicion defensiva.");
-            actitud = 1;
-        }
-        if(actitud == 1){
-            //Defensivo, no cambia de posicion
-            ejercito.get(numSoldado).setActitud("Defensivo");
-            velocidad = 0;
-            ejercito.get(numSoldado).setVelocidad(velocidad);
-        }  
-        else if(actitud == 2){
-            //Ofensivo, avanzará una casilla y su velocidad también cambiará
-            ejercito.get(numSoldado).setActitud("Ofensivo");
-            velocidad++;
-            ejercito.get(numSoldado).setVelocidad(velocidad);
-            int filaAnterior = ejercito.get(numSoldado).getFila();
-            int columnaAnterior = ejercito.get(numSoldado).getColumna();
+        int numEjercito = sc.nextInt();
+            int filaAnterior = ejercito.get(numEjercito).getFila();
+            int columnaAnterior = ejercito.get(numEjercito).getColumna();
             //Le preguntamos al usuario hacia donde va a mover el soldado (arriba, derecha o izquierda)
-            System.out.println("Hacia donde se moverá el soldado\n(1)Arriba\n(2)Derecha\n(3)Izquierda");
+            System.out.println("Hacia donde se moverá el ejercito\n(1)Arriba\n(2)Derecha\n(3)Izquierda\n(4)Abajo");
             int mov = sc.nextInt();
             while(1<2){
-                if(mov != 3 && mov != 2 && mov != 1)
+                if(mov != 3 && mov != 2 && mov != 1 && mov != 4)
                     System.out.println("Ingrese una opción válida");
                 else break;
-                System.out.println("Hacia donde se moverá el soldado\n(1)Arriba\n(2)Derecha\n(3)Izquierda");
+                System.out.println("Hacia donde se moverá el ejercito\n(1)Arriba\n(2)Derecha\n(3)Izquierda\n(4)Abajo");
                 mov = sc.nextInt();
             }
-            ejercito.get(numSoldado).moverSoldado(mov);
+            ejercito.get(numEjercito).moverEjercito(mov);
             //Comprobamos si cruza con un enemigo o aliado. Si es enemigo, lo ataca; si es aliado, vuelve a su posicion original
-            int numEjercito = ejercito.get(numSoldado).getNumEjercito();
-            int fila = ejercito.get(numSoldado).getFila();
-            int columna = ejercito.get(numSoldado).getColumna();
+            int numEjercit = ejercito.get(numEjercito).getNumReino();
+            int fila = ejercito.get(numEjercito).getFila();
+            int columna = ejercito.get(numEjercito).getColumna();
             if(tablero[fila][columna] != null){
                 //Si es aliado
-                if(tablero[fila][columna].getNumEjercito() == numEjercito){
+                if(tablero[fila][columna].getNumReino() == numEjercit){
                     System.out.println("Es aliado, volviendo a la casilla original");
                     if(mov == 1){
-                        ejercito.get(numSoldado).retroceder();
+                        ejercito.get(numEjercito).retroceder();
                     }
                     else if(mov == 2){
-                        ejercito.get(numSoldado).izquierda();
+                        ejercito.get(numEjercito).izquierda();
                     }
                     else{
-                        ejercito.get(numSoldado).derecha();
+                        ejercito.get(numEjercito).derecha();
                     }
                 }
-                //Si es enemigo
+                //Si es enemigo, entraremos ahora a la tabla de solo soldados
                 else{
-                    ejercito.get(numSoldado).atacar(tablero[fila][columna]);
+                    Tablero tableroSoldados = new Tablero();
+                    tableroSoldados.establecerPosEjercito(ejercito.get(numEjercito).getEjercito(), tablero[fila][columna].getEjercito());
+                    System.out.println("--------------------------------------");
+                    System.out.println("Ejército 1");
+                    System.out.println("--------------------------------------");
+                    System.out.println(ejercito.get(numEjercito).getEjercito().toString());
+                    System.out.println("--------------------------------------");
+                    System.out.println("Ejército 2");
+                    System.out.println("--------------------------------------");
+                    System.out.println(tablero[fila][columna].getEjercito().toString());
+                    //Mostramos la cantidad total de soldados y la cantidad de soldados por ejército
+                    System.out.println("\nTOTAL DE SOLDADOS CREADOS: " + (ejercito.get(numEjercito).getLength()+tablero[fila][columna].getLength()));
+                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito.get(numEjercito).getLength());
+                    System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + tablero[fila][columna].getLength());
+                    //Imprimimos el tablero
+                    tableroSoldados.impTableroPers(ejercito.get(numEjercito).getEjercito(), tablero[fila][columna].getEjercito());
+                    //Comienza el juego entre los usuarios
+                    int ganador = 0;
+                    boolean continuar = true;
+                    while(continuar){
+                        //Usamos el metodo actitudSoldado para que el usuario escoja la actitud, serán 2 turnos
+                        System.out.println("=============================================\nEJERCITO 1:");
+                        actitudSoldadoPers(ejercito.get(numEjercito).getEjercito(), tablero[fila][columna], tableroSoldados.getTablero());
+                        tableroSoldados.impTableroActual();
+                        if(estaVacioPers(tablero[fila][columna].getEjercito())){
+                            ganador = 1;
+                            continuar = false;
+                            break;
+                        }
+                        System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito.get(numEjercito).getLength());
+                        System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + tablero[fila][columna].getLength());
+                        System.out.println("=============================================\nEJERCITO 2:");
+                        actitudSoldadoPers(tablero[fila][columna].getEjercito(), ejercito.get(numEjercito), tableroSoldados.getTablero());
+                        tableroSoldados.impTableroActual();
+                        //Usamos un metodo para comprobar si un ejercito ya está vacío, para decidir al ganador
+                        if(estaVacioPers(ejercito.get(numEjercito).getEjercito())){
+                            ganador = 2;
+                            continuar = false;
+                            break;
+                        }
+                        System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito.get(numEjercito).getLength());
+                        System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + tablero[fila][columna].getLength());
+                        System.out.println("Desea continuar?\n(1)Sí\n(2)No");
+                        int cont = sc.nextInt();
+                        while(cont != 1 && cont !=2){
+                            System.out.println("Escoja una opción válida");
+                            cont = sc.nextInt();
+                        }
+                        if(cont == 1)
+                            continue;
+                        else if(cont == 2)
+                            continuar = false;
+                    }
+                    if(ganador == 1){
+                        System.out.println("EL GANADOR ES EL EJÉRCITO 1");
+                        tablero[fila][columna].setVive(false);
+                    }
+                    else if(ganador == 2){
+                        System.out.println("EL GANADOR ES EL EJÉRCITO 2");
+                        ejercito.get(numEjercito).setVive(false);
+                    }
                     //Comprobamos quien muere para actualizar el tablero
-                    if(!ejercito.get(numSoldado).getVive()){
+                    if(!ejercito.get(numEjercito).getVive()){
                         tablero[filaAnterior][columnaAnterior] = null;
-                        ejercito.remove(numSoldado);
+                        ejercito.remove(numEjercito);
                     }
                     else{
                         ejercito2.eliminarEjercito(fila, columna);
-                        tablero[fila][columna] = ejercito.get(numSoldado);
+                        tablero[fila][columna] = ejercito.get(numEjercito);
                         tablero[filaAnterior][columnaAnterior] = null;
                     }
                 }
             }
             else{
-                tablero[fila][columna] = ejercito.get(numSoldado);
+                tablero[fila][columna] = ejercito.get(numEjercito);
                 tablero[filaAnterior][columnaAnterior] = null;
             }
-        }
-        else{
-            //Fuga, retrocederá 1 casilla si su velocidad es 0, no se moverá si su velocidad es mayor a 0
-            ejercito.get(numSoldado).setActitud("Fuga");
-            int filaAnterior = ejercito.get(numSoldado).getFila();
-            int columnaAnterior = ejercito.get(numSoldado).getColumna();
-            if(ejercito.get(numSoldado).getVelocidad() != 0){
-                System.out.println("Velocidad cambiada a 0, cambiando a actitud de defensa");
-                ejercito.get(numSoldado).setActitud("Defensivo");
-                velocidad = 0;
-                ejercito.get(numSoldado).setVelocidad(velocidad);
-            }
-            else{
-                ejercito.get(numSoldado).retroceder();
-                if(ejercito.get(numSoldado).getFila() < 0 || ejercito.get(numSoldado).getFila() > 9){
-                    System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
-                    ejercito.get(numSoldado).avanzar();
-                }
-                else{
-                    int fila = ejercito.get(numSoldado).getFila();
-                    int columna = ejercito.get(numSoldado).getColumna();
-                    if(tablero[fila][columna] != null){
-                        //Si es aliado
-                        if(tablero[fila][columna].getNumEjercito() == ejercito.get(numSoldado).getNumEjercito()){
-                            System.out.println("Es aliado, volviendo a la casilla original");
-                            ejercito.get(numSoldado).avanzar();
-                        }
-                        //Si es enemigo
-                        else{
-                            ejercito.get(numSoldado).atacar(tablero[fila][columna]);
-                            //Comprobamos quien muere para actualizar el tablero
-                            if(!ejercito.get(numSoldado).getVive()){
-                                tablero[filaAnterior][columnaAnterior] = null;
-                            }
-                            else{
-                                tablero[fila][columna] = ejercito.get(numSoldado);
-                                tablero[filaAnterior][columnaAnterior] = null;
-                            }
-                        }
-                    }
-                    else{
-                        tablero[fila][columna] = ejercito.get(numSoldado);
-                        tablero[filaAnterior][columnaAnterior] = null;
-                    }
-                }
-            }
-        }
     }
     public static boolean estaVacioPers(ArrayList<Soldado> ejercito){
+        int muerteTotal = 0;
+        for(int i=0; i<ejercito.size(); i++){
+            if(!ejercito.get(i).getVive())
+                muerteTotal++;
+        }
+        if(muerteTotal == ejercito.size())
+            return true;
+        return false;
+    }
+    public static boolean estaVacioReino(ArrayList<Ejercito> ejercito){
         int muerteTotal = 0;
         for(int i=0; i<ejercito.size(); i++){
             if(!ejercito.get(i).getVive())
