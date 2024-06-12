@@ -1,4 +1,4 @@
-package Lab12;
+package Laboratorio12;
 
 import java.util.ArrayList;
 import java.util.Scanner;

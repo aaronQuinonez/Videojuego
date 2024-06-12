@@ -1,4 +1,4 @@
-package Lab12;
+package Laboratorio12;
 
 public class Soldado{
     private String nombre;
