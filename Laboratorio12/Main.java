@@ -30,16 +30,17 @@ public class Main {
                 //Creamos los respectivos reinos usando el método crearReinos
                 Reino reino1 = crearReinos(eleccion1);
                 Reino reino2 = crearReinos(eleccion2);
-
-                System.out.println("--------------------------------------");
-                System.out.println("Datos de los reinos");
-                System.out.println(reino1.toString());
-                System.out.println(reino2.toString());
                 
                 //Creamos otro tablero para los reinos
                 Tablero tableroReinos = new Tablero();
                 tableroReinos.establecerPosReino(reino1.getReino(), reino2.getReino());
+                System.out.println("--------------------------------------");
+                System.out.println("Datos de los reinos");
+                System.out.println(reino1.toString());
+                System.out.println(reino2.toString());
+                System.out.println("--------------------------------------");
                 tableroReinos.impTableroReino(reino1.getReino(), reino2.getReino());
+
                 Tablero tablero = new Tablero();
                 
                 tablero.establecerPosEjercito(ejercito1.getEjercito(), ejercito2.getEjercito());
@@ -397,12 +398,12 @@ public class Main {
             }
             ejercito.get(numSoldado).moverSoldado(mov);
             //Comprobamos si cruza con un enemigo o aliado. Si es enemigo, lo ataca; si es aliado, vuelve a su posicion original
-            int numEjercito = ejercito.get(numSoldado).getEjercito();
+            int numEjercito = ejercito.get(numSoldado).getNumEjercito();
             int fila = ejercito.get(numSoldado).getFila();
             int columna = ejercito.get(numSoldado).getColumna();
             if(tablero[fila][columna] != null){
                 //Si es aliado
-                if(tablero[fila][columna].getEjercito() == numEjercito){
+                if(tablero[fila][columna].getNumEjercito() == numEjercito){
                     System.out.println("Es aliado, volviendo a la casilla original");
                     if(mov == 1){
                         ejercito.get(numSoldado).retroceder();
@@ -456,7 +457,7 @@ public class Main {
                     int columna = ejercito.get(numSoldado).getColumna();
                     if(tablero[fila][columna] != null){
                         //Si es aliado
-                        if(tablero[fila][columna].getEjercito() == ejercito.get(numSoldado).getEjercito()){
+                        if(tablero[fila][columna].getNumEjercito() == ejercito.get(numSoldado).getNumEjercito()){
                             System.out.println("Es aliado, volviendo a la casilla original");
                             ejercito.get(numSoldado).avanzar();
                         }

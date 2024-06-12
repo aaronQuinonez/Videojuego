@@ -2,7 +2,7 @@ package Laboratorio12;
 
 import java.util.ArrayList;
 
-public class Ejercito {
+public class Ejercito extends Soldado{
     private ArrayList<Soldado> ejercito;
     private String nombreEjercito;
     private int fila;
@@ -54,7 +54,7 @@ public class Ejercito {
     //Metodo para generar nombres
     public void asignarNombres(){
         for(int i=0; i<this.ejercito.size(); i++){
-            String nombre = "Soldado" + i + "x" + this.ejercito.get(i).getEjercito();
+            String nombre = "Soldado" + i + "x" + this.ejercito.get(i).getNumEjercito();
             this.ejercito.get(i).setNombre(nombre);
         }
     }

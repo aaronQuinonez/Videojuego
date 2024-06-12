@@ -35,7 +35,7 @@ public class Soldado{
         this.nombre = nombre;
     }
 
-    public int getEjercito(){
+    public int getNumEjercito(){
         return this.ejercito;
     }
     public void setEjercito(int ejercito){
