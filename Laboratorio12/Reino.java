@@ -46,7 +46,7 @@ public class Reino {
         String cantidad = "Cantidad de ejércitos: " + reino.size();
         String ejercitos = "";
         for(int i=0; i<reino.size(); i++){
-            ejercitos += "\nEJERCITO " + i + "\n";
+            ejercitos += "\n\nEJERCITO " + i;
             ejercitos += reino.get(i).toString();
         }
         return "\n" + nombre + "\n" + cantidad + "\n" + ejercitos;

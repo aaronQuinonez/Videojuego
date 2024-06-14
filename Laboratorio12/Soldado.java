@@ -27,6 +27,13 @@ public class Soldado{
         this.vive = true;
         this.vidaActual = this.nivelVida;
     }
+    public Soldado(Soldado s){
+        this.nivelAtaque = s.nivelAtaque;
+        this.nivelDefensa = s.nivelDefensa;
+        this.nivelVida = s.nivelVida;
+        this.vive = true;
+        this.vidaActual = this.nivelVida;
+    }
 
     public String getNombre(){
         return this.nombre;
@@ -171,31 +178,25 @@ public class Soldado{
     }
     //Metodo si el soldado tiene actitud ofensiva y que el usuario escoja la direccion a ir (arriba, derecha o izquierda)
     public void moverSoldado(int mov){
-        boolean repetir = true;
-        while(repetir){
-            if(mov == 1){
-                avanzar();
-                if(this.getFila() < 0 || this.getFila() > 9){
-                    System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
-                    retroceder();
-                }
-                else repetir = false;
+        if(mov == 1){
+            avanzar();
+            if((this.getFila() < 0 || this.getFila() > 9) || (this.getColumna() < 0 || this.getColumna() >9)){
+                System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
+                retroceder();
             }
-            else if(mov == 2){
-                derecha();
-                if(this.getFila() < 0 || this.getFila() > 9){
-                    System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
-                    izquierda();
-                }
-                else repetir = false;
-            }
-            else if(mov == 3){
+        }
+        else if(mov == 2){
+            derecha();
+            if(this.getFila() < 0 || this.getFila() > 9 || (this.getColumna() < 0 || this.getColumna() >9)){
+                System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
                 izquierda();
-                if(this.getFila() < 0 || this.getFila() > 9){
-                    System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
-                    derecha();
-                }
-                else repetir = false;
+            }
+        }
+        else if(mov == 3){
+            izquierda();
+            if(this.getFila() < 0 || this.getFila() > 9 || (this.getColumna() < 0 || this.getColumna() >9)){
+                System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
+                derecha();
             }
         }
     }

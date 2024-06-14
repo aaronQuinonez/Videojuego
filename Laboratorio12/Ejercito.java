@@ -93,42 +93,43 @@ public class Ejercito{
         this.columna--;
     }
     public void moverEjercito(int mov){
-        boolean repetir = true;
-        while(repetir){
-            if(mov == 1){
-                avanzar();
-                if(this.getFila() < 0 || this.getFila() > 9){
-                    System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
-                    retroceder();
-                }
-                else repetir = false;
-            }
-            else if(mov == 2){
-                derecha();
-                if(this.getFila() < 0 || this.getFila() > 9){
-                    System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
-                    izquierda();
-                }
-                else repetir = false;
-            }
-            else if(mov == 3){
-                izquierda();
-                if(this.getFila() < 0 || this.getFila() > 9){
-                    System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
-                    derecha();
-                }
-                else repetir = false;
-            }
-            else if(mov == 4){
+        if(mov == 1){
+            avanzar();
+            if((this.getFila() < 0 || this.getFila() > 9) || (this.getColumna() < 0 || this.getColumna() >9)){
+                System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
                 retroceder();
-                if(this.getFila() < 0 || this.getFila() > 9){
-                    System.out.println("Está moviéndose fuera del tablero, regresando a la posición anterior.");
-                    avanzar();
-                }
-                else repetir = false;
+            }
+        }
+        else if(mov == 2){
+            derecha();
+            if(this.getFila() < 0 || this.getFila() > 9 || (this.getColumna() < 0 || this.getColumna() >9)){
+                System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
+                izquierda();
+            }
+        }
+        else if(mov == 3){
+            izquierda();
+            if(this.getFila() < 0 || this.getFila() > 9 || (this.getColumna() < 0 || this.getColumna() >9)){
+                System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
+                derecha();
             }
         }
     }
+    public String rankingDePoder(ArrayList<Soldado> ejercito1){
+		for (int i = 1; i < ejercito1.size(); i++) {
+			Soldado actual = ejercito1.get(i);
+            int j = i - 1;
+            while (j >= 0 && ejercito1.get(j).getNivelVida() < actual.getNivelVida()) {
+                ejercito1.set(j+1, ejercito1.get(j));
+                j--;
+            }
+            ejercito1.set(j+1, actual);
+		}
+		System.out.println("Ranking de poder de Ejercito 1:");
+		for(int i = 0; i < ejercito1.size(); i++){
+			System.out.println(ejercito1.get(i).getNombre() + "\t" + ejercito1.get(i).getNivelVida());
+		}
+	}
     public String toString(){
         String ejer = "";
         for(int i=0; i<ejercito.size(); i++){

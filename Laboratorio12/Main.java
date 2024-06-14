@@ -1,5 +1,6 @@
 package Laboratorio12;
 
+import java.sql.RowId;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -80,41 +81,66 @@ public class Main {
                     else if(cont == 2)
                         contReino = false;
                 }
+                if(ganadorReino == 1){
+                    System.out.println("EL GANADOR ES EL JUGADOR 1");
+                }else{
+                    System.out.println("EL GANADOR ES EL JUGADOR 2");                
+                }
             }
             else if(opcion==2){
-                Tablero tablero = new Tablero();
-                //Personalizado (Usaremos ArrayList para evitar conflictos con las opciones de agregar y eliminar soldados)
-                System.out.println("--------------------------------------");
-                System.out.println("Generando ejércitos");
-                System.out.println("--------------------------------------");
-                Ejercito ejercito1 = new Ejercito();
-                ejercito1.asignarEstadisticas();
-                ejercito1.establecerEquipo(1);
-                ejercito1.asignarNombres();
-                Ejercito ejercito2 = new Ejercito();
-                ejercito2.asignarEstadisticas();
-                ejercito2.establecerEquipo(2);
-                ejercito2.asignarNombres();
+                //Pedimos que escojan su reino
+                System.out.println("JUGADOR 1\nEscoja su reino\n(1)Inglaterra\n(2)Francia\n(3)Sacro Imperio\n(4)Castilla-Aragón\n(5)Moros");
+                int eleccion1 = sc.nextInt();
+                while(eleccion1 <= 0 || eleccion1 >= 6){
+                    System.out.println("Escoja una opción válida");
+                    System.out.println("JUGADOR 1\nEscoja su reino\n(1)Inglaterra\n(2)Francia\n(3)Sacro Imperio\n(4)Castilla-Aragón\n(5)Moros");
+                    eleccion1 = sc.nextInt();
+                }
+                System.out.println("JUGADOR 2\nEscoja su reino\n(1)Inglaterra\n(2)Francia\n(3)Sacro Imperio\n(4)Castilla-Aragón\n(5)Moros");
+                int eleccion2 = sc.nextInt();
+                while((eleccion2 <= 0 || eleccion2 >= 6) || eleccion2 == eleccion1){
+                    System.out.println("Escoja una opción válida");
+                    System.out.println("JUGADOR 2\nEscoja su reino\n(1)Inglaterra\n(2)Francia\n(3)Sacro Imperio\n(4)Castilla-Aragón\n(5)Moros");
+                    eleccion2 = sc.nextInt();
+                }
+                //Creamos los respectivos reinos usando el método crearReinos
+                Reino reino1 = crearReinos(eleccion1);
+                reino1.establecerEquipo(eleccion1);
+                reino1.asignarNombres(eleccion1);
+                Reino reino2 = crearReinos(eleccion2);
+                reino2.establecerEquipo(eleccion2);
+                reino2.asignarNombres(eleccion2);
                 
-                tablero.establecerPosEjercito(ejercito1.getEjercito(), ejercito2.getEjercito());
-
-                System.out.println("DATOS\n\n");
-                System.out.println("EJERCITO 1:\n"); 
-                ejercito1.toString();
-                System.out.println("\n\nEJERCITO 2:\n");
-                ejercito2.toString();
+                //Creamos otro tablero para los reinos
+                Tablero tableroReinos = new Tablero();
+                tableroReinos.establecerPosReino(reino1.getReino(), reino2.getReino());
+                System.out.println("--------------------------------------");
+                System.out.println("Datos de los reinos");
+                System.out.println(reino1.toString());
+                System.out.println(reino2.toString());
+                System.out.println("--------------------------------------");
+                tableroReinos.impTableroReino(reino1.getReino(), reino2.getReino());
+                
                 boolean continuar = true;
                 while(continuar){
                     //Pedimos a que ejército va a personalizar
-                    System.out.println("Escoja el ejército a personalizar:");
-                    int numEjer = sc.nextInt();
-                    //Creamos un ArrayList de tipo soldado que tendrá las mismas estadísticas que el ejército escogido
-                    Ejercito ejercitoPerson = new Ejercito();
-                    if(numEjer == 1){
-                        ejercitoPerson = ejercito1;
-                    }else if(numEjer == 2){
-                        ejercitoPerson = ejercito2;
+                    System.out.println("Escoja el reino a personalizar:");
+                    int numReino = sc.nextInt();
+                    Reino ejercitoReino = new Reino();
+                    if(numReino == 1){
+                        ejercitoReino = reino1;
+                    }else if(numReino == 2){
+                        ejercitoReino = reino2;
                     }
+                    //Pedimos que escoja a un ejercito del reino
+                    System.out.println("Escoja el ejercito:");
+                    int numEjer = sc.nextInt();
+                    while(numEjer < 0 || numEjer >= ejercitoReino.getSize()){
+                        System.out.println("Escoja en numero valido");
+                        numEjer = sc.nextInt();
+                    }
+                    Ejercito ejercitoPerson = ejercitoReino.getReino().get(numEjer);
+                    System.out.println(ejercitoPerson.toString());
                     //Mostramos las opciones para personalizar al ejército
                     System.out.println("Escoja las siguientes opciones:\n(a)Crear Soldado\n(b)Eliminar Soldado\n(c)Clonar Soldado\n(d)Modificar Soldado\n(e)Comparar Soldados\n(f)Intercambiar soldados\n(g)Ver soldado\n(h)Ver ejército\n(i)Sumar niveles\n(j)Jugar\n(k)Volver");
                     String opc = sc.next();
@@ -133,9 +159,9 @@ public class Main {
                             int vida = sc.nextInt();
                             //Asignamos los valores ingresados en un nuevo objeto Soldado
                             Soldado soldadoNuevo = new Soldado(ataque, defensa, vida);
-                            soldadoNuevo.setEjercito(numEjer);
+                            soldadoNuevo.setEjercito(numReino);
                             soldadoNuevo.setNombre("Soldado" + (ejercitoPerson.getEjercito().size()) + "x" + numEjer);
-                            tablero.establecerNuevaPos(soldadoNuevo);
+                            tableroReinos.establecerNuevaPos(soldadoNuevo);
                             //Agregamos al soldado nuevo en nuestro ArrayList
                             ejercitoPerson.getEjercito().add(soldadoNuevo);
                             System.out.println("\n\nVOLVIENDO AL MENÚ\n\n");
@@ -149,7 +175,7 @@ public class Main {
                         else{
                             //Eliminamos al último soldado del ejército
                             System.out.println("El " + ejercitoPerson.getEjercito().get(ejercitoPerson.getEjercito().size()-1).getNombre() + " será eliminado");
-                            tablero.quitarPos(ejercitoPerson.getEjercito().get(ejercitoPerson.getEjercito().size()-1).getFila(), ejercitoPerson.getEjercito().get(ejercitoPerson.getEjercito().size()-1).getColumna());
+                            tableroReinos.quitarPos(ejercitoPerson.getEjercito().get(ejercitoPerson.getEjercito().size()-1).getFila(), ejercitoPerson.getEjercito().get(ejercitoPerson.getEjercito().size()-1).getColumna());
                             ejercitoPerson.getEjercito().remove(ejercitoPerson.getEjercito().size()-1);
                         }
                     }
@@ -163,10 +189,9 @@ public class Main {
                             int num = sc.nextInt();
                             if(num >= 0 && num < ejercitoPerson.getEjercito().size()){
                                 //Creamos un soldado con las características del soldado elegido;
-                                Soldado soldadoClon = new Soldado();
-                                soldadoClon = ejercitoPerson.getEjercito().get(num);
-                                soldadoClon.setNombre("Soldado" + ejercitoPerson.getEjercito().size() + "x" + numEjer);
-                                tablero.establecerNuevaPos(soldadoClon);
+                                Soldado soldadoClon = new Soldado(ejercitoPerson.getEjercito().get(num));
+                                soldadoClon.setNombre("Soldado" + ejercitoPerson.getEjercito().size() + "x" + numReino);
+                                tableroReinos.establecerNuevaPos(soldadoClon);
                                 //Agregamos al soldado clonado a nuestro ejército
                                 ejercitoPerson.getEjercito().add(soldadoClon);
                             }
@@ -242,7 +267,7 @@ public class Main {
                             int filaSegundoSold = ejercitoPerson.getEjercito().get(segundoSoldado).getFila();
                             int columnaPrimerSold = ejercitoPerson.getEjercito().get(primerSoldado).getColumna();
                             int columnaSegundoSold = ejercitoPerson.getEjercito().get(segundoSoldado).getColumna();
-                            tablero.cambiarPos(ejercitoPerson.getEjercito().get(primerSoldado), ejercitoPerson.getEjercito().get(segundoSoldado));
+                            tableroReinos.cambiarPos(ejercitoPerson.getEjercito().get(primerSoldado), ejercitoPerson.getEjercito().get(segundoSoldado));
                             ejercitoPerson.getEjercito().get(primerSoldado).setFila(filaSegundoSold);
                             ejercitoPerson.getEjercito().get(primerSoldado).setColumna(columnaSegundoSold);
                             ejercitoPerson.getEjercito().get(segundoSoldado).setFila(filaPrimerSold);
@@ -262,7 +287,7 @@ public class Main {
                     }
                     else if(opc.equals("h")){
                         //Ver ejercito
-                        ejercitoPerson.toString();
+                        System.out.println(ejercitoPerson.toString());
                     }
                     else if(opc.equals("i")){
                         //Sumar niveles
@@ -277,60 +302,53 @@ public class Main {
                         System.out.println("SUMATORIA:\nAtaque: " + sumAtaque + "\nDefensa: " + sumDefensa + "\nVida: " + sumVida);
                     }
                     else if(opc.equals("j")){
-                        System.out.println("\nTOTAL DE SOLDADOS CREADOS: " + (ejercito1.getLength()+ejercito2.getLength()));
-                        System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
-                        System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
-                        tablero.impTableroPers(ejercito1.getEjercito(), ejercito2.getEjercito());
-                        //Comienza el juego entre los usuarios
-                        int ganador = 0;
-                        boolean cont = true;
-                        while(cont){
+                        tableroReinos.impTableroReino(reino1.getReino(), reino2.getReino());
+                        int ganadorRein = 0;
+                        boolean contReino = true;
+                        while(contReino){
                             //Usamos el metodo actitudSoldado para que el usuario escoja la actitud, serán 2 turnos
-                            System.out.println("=============================================\nEJERCITO 1:");
-                            actitudSoldadoPers(ejercito1.getEjercito(), ejercito2, tablero.getTablero());
-                            tablero.impTableroActual();
-                            if(estaVacioPers(ejercito2.getEjercito())){
-                                ganador = 1;
-                                cont = false;
+                            System.out.println("=============================================\nReino 1:");
+                            actitudReino(reino1.getReino(), reino2, tableroReinos.getEjercito());
+                            tableroReinos.impTableroActualReino();
+                            if(estaVacioReino(reino2.getReino())){
+                                ganadorRein = 1;
+                                contReino = false;
                                 break;
                             }
-                            System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
-                            System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
+                            System.out.println("\nTOTAL DE EJERCITOS EN REINO 1: " + reino1.getSize());
+                            System.out.println("\nTOTAL DE EJERCITOS EN REINO 2: " + reino2.getSize());
                             System.out.println("=============================================\nEJERCITO 2:");
-                            actitudSoldadoPers(ejercito2.getEjercito(), ejercito1, tablero.getTablero());
+                            actitudReino(reino2.getReino(), reino1, tableroReinos.getEjercito());
+                            tableroReinos.impTableroActualReino();
                             //Usamos un metodo para comprobar si un ejercito ya está vacío, para decidir al ganador
-                            if(estaVacioPers(ejercito1.getEjercito())){
-                                ganador = 2;
-                                cont = false;
+                            if(estaVacioReino(reino1.getReino())){
+                                ganadorRein = 2;
+                                contReino = false;
                                 break;
                             }
-                            System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito1.getLength());
-                            System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + ejercito2.getLength());
+                            System.out.println("\nTOTAL DE EJERCITOS EN EJÉRCITO 1: " + reino1.getSize());
+                            System.out.println("\nTOTAL DE EJERCITOS EN EJÉRCITO 2: " + reino2.getSize());
                             System.out.println("Desea continuar?\n(1)Sí\n(2)No");
-                            int conti = sc.nextInt();
-                            while(conti != 1 && conti !=2){
+                            int cont = sc.nextInt();
+                            while(cont != 1 && cont !=2){
                                 System.out.println("Escoja una opción válida");
-                                conti = sc.nextInt();
+                                cont = sc.nextInt();
                             }
-                            if(conti == 1)
+                            if(cont == 1)
                                 continue;
-                            else if(conti == 2)
-                                continuar = false;
+                            else if(cont == 2)
+                                contReino = false;
                         }
-                        if(ganador == 1)
-                            System.out.println("EL GANADOR ES EL EJÉRCITO 1");
-                        else if(ganador == 2)
-                            System.out.println("EL GANADOR ES EL EJÉRCITO 2");
-                        break;
+                        if(ganadorRein == 1){
+                            System.out.println("EL GANADOR ES EL JUGADOR 1");
+                        }else{
+                            System.out.println("EL GANADOR ES EL JUGADOR 2");                
+                        }
                     }
                     else if(opc.equals("k"))
                         continuar = false;
                     else
                         System.out.println("Opcion no válida");
-                    if(numEjer == 1)
-                        ejercito1 = ejercitoPerson;
-                    else if(numEjer == 2)
-                        ejercito2 = ejercitoPerson;
                 }
             }
             else if(opcion==3)
@@ -629,4 +647,19 @@ public class Main {
         }
         return reino;
     }
+    public void rankingDePoder(ArrayList<Soldado> ejercito1){
+		for (int i = 1; i < ejercito1.size(); i++) {
+			Soldado actual = ejercito1.get(i);
+            int j = i - 1;
+            while (j >= 0 && ejercito1.get(j).getNivelVida() < actual.getNivelVida()) {
+                ejercito1.set(j+1, ejercito1.get(j));
+                j--;
+            }
+            ejercito1.set(j+1, actual);
+		}
+		System.out.println("Ranking de poder de Ejercito 1:");
+		for(int i = 0; i < ejercito1.size(); i++){
+			System.out.println(ejercito1.get(i).getNombre() + "\t" + ejercito1.get(i).getNivelVida());
+		}
+	}
 }
