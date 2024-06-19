@@ -553,22 +553,13 @@ public class Main {
                     System.out.println("=============================================\nEJERCITO 1:");
                     actitudSoldadoPers(ejercito.get(numEjercito).getEjercito(), tablero[fila][columna], tableroSoldados.getTablero());
                     tableroSoldados.impTableroActual();
-                    if(estaVacioPers(tablero[fila][columna].getEjercito())){
-                        ganador = 1;
-                        continuar = false;
-                        break;
-                    }
+
                     System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito.get(numEjercito).getLength());
                     System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + tablero[fila][columna].getLength());
                     System.out.println("=============================================\nEJERCITO 2:");
                     actitudSoldadoPers(tablero[fila][columna].getEjercito(), ejercito.get(numEjercito), tableroSoldados.getTablero());
                     tableroSoldados.impTableroActual();
-                    //Usamos un metodo para comprobar si un ejercito ya está vacío, para decidir al ganador
-                    if(estaVacioPers(ejercito.get(numEjercito).getEjercito())){
-                        ganador = 2;
-                        continuar = false;
-                        break;
-                    }
+
                     System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 1: " + ejercito.get(numEjercito).getLength());
                     System.out.println("\nTOTAL DE SOLDADOS EN EJÉRCITO 2: " + tablero[fila][columna].getLength());
                     System.out.println("Desea continuar?\n(1)Sí\n(2)No");

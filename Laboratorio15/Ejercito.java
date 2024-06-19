@@ -60,6 +60,22 @@ public class Ejercito{
         }
         return vidaTotal;
     }
+    //Método para obtener el ataque total del ejército
+    public int getAtaqueTotal(){
+        int ataqueTotal = 0;
+        for(int i=0; i<ejercito.size(); i++){
+            ataqueTotal += ejercito.get(i).getNivelAtaque();
+        }
+        return ataqueTotal;
+    }
+    //Método para obtener la defensa total del ejército
+    public int getDefensaTotal(){
+        int defensaTotal = 0;
+        for(int i=0; i<ejercito.size(); i++){
+            defensaTotal += ejercito.get(i).getNivelDefensa();
+        }
+        return defensaTotal;
+    }
     public void asignarEstadisticas(){
         int length = (int) (Math.random()*10+1);
         for(int i=0; i<length; i++){
@@ -128,6 +144,78 @@ public class Ejercito{
             if((this.getFila() < 0 || this.getFila() > 9) || (this.getColumna() < 0 || this.getColumna() >9)){
                 System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
                 avanzar();
+            }
+        }
+    }
+    //Método para atacar entre ejércitos
+    public void atacar(Ejercito ejercitoEnemigo){
+        int totalVida = ejercitoEnemigo.getVidaTotal() + this.getVidaTotal();
+        
+        double probabilidadEjercitoEnemigo = (ejercitoEnemigo.getVidaTotal() * 100) / totalVida;
+        double probabilidadSold = (this.getVidaTotal() * 100) / totalVida;
+        if(probabilidadSold > probabilidadEjercitoEnemigo){
+            System.out.println("Venciste al enemigo por mayor probabilidad de triunfo " + "(" + probabilidadSold + "%)");
+            ejercitoEnemigo.setVive(false);
+            for(int i=0; i<ejercito.size(); i++){
+                ejercito.get(i).setNivelVida(ejercito.get(i).getNivelVida()+1);
+            }
+        }
+        else if(probabilidadSold < probabilidadEjercitoEnemigo){
+            System.out.println("El enemigo te venció porque tiene mayor probabilidad de triunfo" + "(" + probabilidadEjercitoEnemigo + "%)");
+            this.vive = false;
+            for(int i=0; i<ejercitoEnemigo.getLength(); i++){
+                ejercitoEnemigo.getEjercito().get(i).setVidaActual(ejercitoEnemigo.getEjercito().get(i).getVidaActual()+1);
+            }
+        }
+        else{
+            //Usamos el nivel de ataque cuando tengan el mismo nivel de vida
+            if(this.getAtaqueTotal() > ejercitoEnemigo.getAtaqueTotal()){
+                System.out.println("Venciste al enemigo por mayor nivel de ataque");
+                ejercitoEnemigo.setVive(false);
+                for(int i=0; i<ejercito.size(); i++){
+                    ejercito.get(i).setNivelVida(ejercito.get(i).getNivelVida()+1);
+                }
+            }
+            else if(this.getAtaqueTotal() < ejercitoEnemigo.getAtaqueTotal()){
+                System.out.println("El enemigo te venció por mayor nivel de ataque");
+                this.vive = false;
+                for(int i=0; i<ejercitoEnemigo.getLength(); i++){
+                    ejercitoEnemigo.getEjercito().get(i).setVidaActual(ejercitoEnemigo.getEjercito().get(i).getVidaActual()+1);
+                }
+            }
+            else{
+                //Si también tiene el mismo nivel de ataque, entonces usamos la defensa
+                if(this.getDefensaTotal() > ejercitoEnemigo.getDefensaTotal()){
+                    System.out.println("Venciste al enemigo por mayor nivel de defensa");
+                    ejercitoEnemigo.setVive(false);
+                    for(int i=0; i<ejercito.size(); i++){
+                        ejercito.get(i).setNivelVida(ejercito.get(i).getNivelVida()+1);
+                    }
+                }
+                else if(this.getDefensaTotal() > ejercitoEnemigo.getDefensaTotal()){
+                    System.out.println("El enemigo te venció por mayor nivel de defensa");
+                    this.vive = false;
+                    for(int i=0; i<ejercitoEnemigo.getLength(); i++){
+                        ejercitoEnemigo.getEjercito().get(i).setVidaActual(ejercitoEnemigo.getEjercito().get(i).getVidaActual()+1);
+                    }
+                }
+                else{
+                    //Si tienen todas sus estadísticas iguales, entonces se decidirá al azar
+                    int azar = (int) (Math.random()*2+1);
+                    if(azar == 1){
+                        System.out.println("Venciste al enemigo contra todo pronóstico (al azar)");
+                        ejercitoEnemigo.setVive(false);
+                        for(int i=0; i<ejercito.size(); i++){
+                            ejercito.get(i).setNivelVida(ejercito.get(i).getNivelVida()+1);
+                        }
+                    }else{
+                        System.out.println("El enemigo te venció contra todo pronóstico (al azar)");
+                        this.vive = false;
+                        for(int i=0; i<ejercitoEnemigo.getLength(); i++){
+                            ejercitoEnemigo.getEjercito().get(i).setVidaActual(ejercitoEnemigo.getEjercito().get(i).getVidaActual()+1);
+                        }
+                    }
+                }
             }
         }
     }
