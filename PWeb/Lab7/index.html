@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Fetch</title>
+</head>
+<body>
+    <h1>JavaScript Fetch</h1>
+    <p id="demo">Texto reemplazado</p>
+    <button type="button" onclick="reemplazar()">Reemplazar texto</button>
+    <script>
+        function reemplazar(){
+            let texto = "https://jsonplaceholder.typicode.com/users";
+            fetch(texto)
+            .then(response => response.json())
+            .then(users => {
+                let tabla = `
+                    <table border="1">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Usuario</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Website</th>
+                        </tr>
+                `;
+                users.forEach(user => {
+                    tabla += `
+                        <tr>
+                            <td>${user.name}</td>
+                            <td>${user.username}</td>
+                            <td>${user.email}</td>
+                            <td>${user.phone}</td>
+                            <td>${user.website}</td>
+                        </tr>
+                    `;
+                });
+                tabla += `</table>`;
+                document.getElementById("demo").innerHTML = tabla;
+            })
+        }
+    </script>
+</body>
+</html>

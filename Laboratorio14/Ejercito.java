@@ -1,4 +1,4 @@
-package Laboratorio12;
+package Laboratorio14;
 
 import java.util.ArrayList;
 
@@ -112,6 +112,13 @@ public class Ejercito{
             if(this.getFila() < 0 || this.getFila() > 9 || (this.getColumna() < 0 || this.getColumna() >9)){
                 System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
                 derecha();
+            }
+        }
+        else if(mov == 4){
+            retroceder();
+            if((this.getFila() < 0 || this.getFila() > 9) || (this.getColumna() < 0 || this.getColumna() >9)){
+                System.out.println("Esta moviéndose fuera del tablero, regresando a la posicion anterior.");
+                avanzar();
             }
         }
     }
