@@ -12,7 +12,6 @@ public class Soldado{
     private boolean vive;
     private int fila;
     private int columna;
-    private int posicion;
 
     public Soldado(){
         this.nivelAtaque = (int) (Math.random()*5+1);

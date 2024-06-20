@@ -9,7 +9,6 @@ public class Ejercito{
     private int fila;
     private int columna;
     private boolean vive;
-    private int posicion;
 
     public Ejercito(){
         this.ejercito = new ArrayList<Soldado>();
