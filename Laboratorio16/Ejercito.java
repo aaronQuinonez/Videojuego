@@ -1,4 +1,4 @@
-package Lab16;
+package Laboratorio16;
 
 import java.util.ArrayList;
 
@@ -78,11 +78,18 @@ public class Ejercito{
     public void asignarEstadisticas(){
         int length = (int) (Math.random()*10+1);
         for(int i=0; i<length; i++){
-            //Creamos un objeto de tipo Soldado para que sus datos se almacenen en el ArrayList de ejercito
-            Soldado objeto;
-            objeto = new Soldado();
-            //Ahora asignamos a ejercito los valores del objeto;
-            this.ejercito.add(objeto);
+            //Creamos de manera aleatoria un espadachin, arquero o caballero que se almacenará en el ArrayList
+            int numRand = (int) (Math.random()*3+1);
+            if(numRand == 1){
+                Espadachin objeto = new Espadachin();
+                this.ejercito.add(objeto);
+            }else if(numRand == 2){
+                Arquero objeto = new Arquero();
+                this.ejercito.add(objeto);
+            }else{
+                Caballero objeto = new Caballero();
+                this.ejercito.add(objeto);
+            }
         }
     }
     public void establecerEquipo(int numEjercito){
@@ -93,7 +100,7 @@ public class Ejercito{
     //Metodo para generar nombres
     public void asignarNombres(){
         for(int i=0; i<this.ejercito.size(); i++){
-            String nombre = "Soldado" + i + "x" + this.ejercito.get(i).getNumEjercito();
+            String nombre = this.ejercito.get(i).getNombre() + i + "x" + this.ejercito.get(i).getNumEjercito();
             this.ejercito.get(i).setNombre(nombre);
         }
     }

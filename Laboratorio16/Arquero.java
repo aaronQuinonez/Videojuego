@@ -1,19 +1,24 @@
-package Lab16;
+package Laboratorio16;
 
 public class Arquero extends Soldado{
     private int flechas;
     public Arquero(){
         super();
         nombre = "Arquero";
-        flechas = (int) (Math.random()*10+1);
+        //Tendrá 10 flechas por predeterminado
+        flechas = 10;
     }
     public int getFlechas(){
         return flechas;
     }
     public void disparar(){
-        flechas--;
+        if(flechas == 0){
+            System.out.println("El arquero ya no tiene flechas");
+        }else{
+            flechas--;
+        }
     }
     public String toString(){
-        return super.toString() + "\nNúmero de flechas: " + getFlechas();
+        return super.toString() + "\nNúmero de flechas: " + flechas;
     }
 }
