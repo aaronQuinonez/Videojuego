@@ -225,6 +225,15 @@ public class Ejercito{
             }
         }
     }
+    public int getVivos(){
+        int cont = 0;
+        for(int i=0; i<this.ejercito.size(); i++){
+            if(this.ejercito.get(i).getVive()){
+                cont++;
+            }
+        }
+        return cont;
+    }
     public String toString(){
         String ejer = "";
         for(int i=0; i<ejercito.size(); i++){

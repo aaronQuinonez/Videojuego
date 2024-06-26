@@ -32,9 +32,9 @@ public class Mapa {
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 10; j++){
                 if(tablero[i][j] != null){
-                    System.out.printf("| %-11s ", this.tablero[i][j].getNombre());
+                    System.out.printf("| %-13s ", this.tablero[i][j].getNombre());
                 } else {
-                    System.out.print("|      _      ");
+                    System.out.print("|       _       ");
                 }
             }
             System.out.println("|");
@@ -118,9 +118,9 @@ public class Mapa {
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 10; j++){
                 if(tableroEjercito[i][j] != null){
-                    System.out.printf("| %-11s ", this.tableroEjercito[i][j].getNombreEjercito());
+                    System.out.printf("| %-13s ", this.tableroEjercito[i][j].getNombreEjercito());
                 } else {
-                    System.out.print("|      _      ");
+                    System.out.print("|        _         ");
                 }
             }
             System.out.println("|");
@@ -163,9 +163,9 @@ public class Mapa {
         for(int i = 0; i < 10; i++){
             for(int j = 0; j < 10; j++){
                 if(tablero[i][j] != null){
-                    System.out.printf("| %-11s ", this.tablero[i][j].getNombre());
+                    System.out.printf("| %-13s ", this.tablero[i][j].getNombre());
                 } else {
-                    System.out.print("|      _      ");
+                    System.out.print("|       _       ");
                 }
             }
             System.out.println("|");
