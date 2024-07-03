@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Nueva Pagina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        form {
+            margin: 20px 0;
+        }
+        label, textarea, input {
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Crear Nueva Página</h1>
+    <form action="guardarPagina.pl"id="newPageForm">
+        <label for="pageTitle">Titulo:</label>
+        <input type="text" id="pageTitle" name="pageTitle" required>
+        
+        <textarea id="pageContent" name="pageContent" rows="10" required></textarea>
+        
+        <button type="submit">Enviar</button>
+    </form>
+</body>
